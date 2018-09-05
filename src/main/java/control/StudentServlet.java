@@ -7,7 +7,6 @@ import entity.Student;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.ibatis.session.SqlSession;
 import service.StudentService;
-import service.UserService;
 import utils.ContextUtils;
 import utils.MyBatisUtil;
 
@@ -150,9 +149,7 @@ public class StudentServlet extends HttpServlet {
         }
         student.setId(null);
         stuService.addStudent(student);
-        List<Student> allStuList = stuService.showAllUser();
-        request.setAttribute("allStuList",allStuList);
-        request.getRequestDispatcher("/admin/user/allStudent.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath()+"/StudentServlet?op=showAllStudent");
     }
 
     private void doShowAllUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
